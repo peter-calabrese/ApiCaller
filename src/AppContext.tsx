@@ -28,7 +28,7 @@ const initialState: InitialState = {
   baseURL: '',
   params: [
     {
-      id: 'cum',
+      id: '',
       value: '',
     },
   ],
