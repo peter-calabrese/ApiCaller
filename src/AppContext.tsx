@@ -5,6 +5,7 @@ export enum Types {
   ADD_PARAMS = 'ADD_PARAMS',
   UPDATE_PARAMS = 'UPDATE_PARAMS',
   DELETE_PARAMS = 'DELETE_PARAMS',
+  APPEND_PARAMS = 'APPEND_PARAMS',
 }
 interface AppActions {
   type: Types;
@@ -47,6 +48,7 @@ const reducer = (state: InitialState, action: AppActions) => {
         ...shallow[action.index!],
         [action.key!]: action.payload,
       };
+
       return { ...state, params: shallow };
     case Types.DELETE_PARAMS:
       if (state.params.length > 1) {
@@ -56,6 +58,10 @@ const reducer = (state: InitialState, action: AppActions) => {
       }
       return { ...state, params: [{ id: '', value: '' }] };
 
+    case Types.APPEND_PARAMS:
+      const queryParams = state.params.map((param) => param.id);
+      console.log(queryParams);
+      return { ...state };
     default:
       return state;
   }
