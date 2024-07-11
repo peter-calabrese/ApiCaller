@@ -3,10 +3,10 @@ import TabList from '../components/Tabs';
 import TextInput from '../components/TextInput';
 import { Types, useAppContext } from '../AppContext';
 import Params from '../components/Params';
-
+import PrettyPrintJSON from '../components/PrettyPrintJSON/PrettyPrintJSON';
 const Tabbed = () => {
   const {
-    state: { baseURL },
+    state: { baseURL, data },
     dispatch,
   } = useAppContext();
 
@@ -18,8 +18,8 @@ const Tabbed = () => {
         <div>
           <label>Base URL:</label>
           <TextInput
-            placeholder={'Enter Your Base URL'}
             value={baseURL}
+            placeholder={'Enter BaseURL'}
             setValue={(e) =>
               dispatch({
                 type: Types.UPDATE_STATE,
@@ -39,7 +39,12 @@ const Tabbed = () => {
     {
       key: '3',
       label: 'Body',
-      children: 'Content of Tab Pane 3',
+      children: 'Pending JSON Editor Source',
+    },
+    {
+      key: '4',
+      label: 'Response',
+      children: <PrettyPrintJSON jsonData={data} />,
     },
   ];
 

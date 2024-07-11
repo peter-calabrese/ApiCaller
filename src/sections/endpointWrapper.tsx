@@ -36,12 +36,19 @@ const EndpointWrapper = () => {
 
   const makeCall = async () => {
     setLoading(true);
-    const url = `${baseURL}${endpoint}${queryString ? `?${queryString}` : ''}`;
+    const url = `${baseURL}${endpoint}${
+      queryString && method === 'GET' ? `?${queryString}` : ''
+    }`;
     try {
       const res = await fetch(url, {
         method: method!,
       });
-      console.log(await res.json());
+      dispatch({
+        type: Types.UPDATE_STATE,
+        key: 'data',
+        payload: await res.json(),
+      });
+      console.log(res.json());
     } catch {
     } finally {
       setLoading(false);
@@ -60,7 +67,9 @@ const EndpointWrapper = () => {
       </div>
       <TextInput
         placeholder={'Endpoint'}
-        value={`${endpoint}${queryString.length > 1 ? `?${queryString}` : ''}`}
+        value={`${endpoint}${
+          queryString.length > 1 && method === 'GET' ? `?${queryString}` : ''
+        }`}
         setValue={(e) =>
           dispatch({
             type: Types.UPDATE_STATE,

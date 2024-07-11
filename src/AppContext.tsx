@@ -23,6 +23,7 @@ interface InitialState {
   baseURL: string;
   params: Params[];
   queryString: string;
+  data: any;
 }
 const initialState: InitialState = {
   endpoint: '',
@@ -35,6 +36,7 @@ const initialState: InitialState = {
     },
   ],
   queryString: '',
+  data: {},
 };
 const reducer = (state: InitialState, action: AppActions) => {
   switch (action.type) {

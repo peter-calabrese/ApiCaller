@@ -1,0 +1,12 @@
+pre {
+  background-color: #121212;
+  padding: 10px;
+  border-radius: 5px;
+  overflow: auto;
+  max-height: calc(100vh - 62px - 32px - 3.3rem);
+}
+
+code {
+  font-family: 'JetBrains Mono';
+  color: #fff;
+}
