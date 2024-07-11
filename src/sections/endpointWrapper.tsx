@@ -48,7 +48,6 @@ const EndpointWrapper = () => {
         key: 'data',
         payload: await res.json(),
       });
-      console.log(res.json());
     } catch {
     } finally {
       setLoading(false);
@@ -81,7 +80,14 @@ const EndpointWrapper = () => {
       <Button
         type={'primary'}
         loading={loading}
-        onClick={makeCall}
+        onClick={() => {
+          makeCall();
+          dispatch({
+            type: Types.UPDATE_STATE,
+            key: 'activeKey',
+            payload: '4',
+          });
+        }}
         icon={<SendOutlined />}
         iconPosition={'end'}
       >

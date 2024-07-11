@@ -1,3 +1,4 @@
+import { TabsProps } from 'antd';
 import { createContext, useContext, useReducer } from 'react';
 
 export enum Types {
@@ -24,6 +25,7 @@ interface InitialState {
   params: Params[];
   queryString: string;
   data: any;
+  activeKey: TabsProps['activeKey'];
 }
 const initialState: InitialState = {
   endpoint: '',
@@ -37,11 +39,11 @@ const initialState: InitialState = {
   ],
   queryString: '',
   data: {},
+  activeKey: '1',
 };
 const reducer = (state: InitialState, action: AppActions) => {
   switch (action.type) {
     case Types.UPDATE_STATE:
-      console.log(state, action.payload);
       return { ...state, [action.key!]: action.payload };
     case Types.ADD_PARAMS:
       state.params.push({ id: '', value: '' });

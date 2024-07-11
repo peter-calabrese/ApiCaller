@@ -6,7 +6,7 @@ import Params from '../components/Params';
 import PrettyPrintJSON from '../components/PrettyPrintJSON/PrettyPrintJSON';
 const Tabbed = () => {
   const {
-    state: { baseURL, data },
+    state: { baseURL, data, activeKey },
     dispatch,
   } = useAppContext();
 
@@ -48,7 +48,7 @@ const Tabbed = () => {
     },
   ];
 
-  return <TabList items={items} />;
+  return <TabList items={items} activeKey={activeKey} />;
 };
 
 export default Tabbed;
