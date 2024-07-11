@@ -8,8 +8,10 @@
 - [ ] Put
 - [x] Custom Base URL
 - [x] Specified endpoints
-- [ ] Custom Params appending to url
+- [x] Custom Params appending to url
 - [ ] Body
   - [ ] String
   - [ ] JSON
   - [ ] XML?
+- [ ] Pretty Print Response
+- [ ] Save query params and base url to localStorage

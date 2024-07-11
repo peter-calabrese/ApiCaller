@@ -28,7 +28,7 @@ const options = [
 
 const EndpointWrapper = () => {
   const {
-    state: { endpoint, method, baseURL },
+    state: { endpoint, method, baseURL, queryString },
     dispatch,
   } = useAppContext();
 
@@ -36,7 +36,7 @@ const EndpointWrapper = () => {
 
   const makeCall = async () => {
     setLoading(true);
-    const url = baseURL + endpoint;
+    const url = `${baseURL}${endpoint}${queryString ? `?${queryString}` : ''}`;
     try {
       const res = await fetch(url, {
         method: method!,
@@ -60,12 +60,12 @@ const EndpointWrapper = () => {
       </div>
       <TextInput
         placeholder={'Endpoint'}
-        value={endpoint}
+        value={`${endpoint}${queryString.length > 1 ? `?${queryString}` : ''}`}
         setValue={(e) =>
           dispatch({
             type: Types.UPDATE_STATE,
             key: 'endpoint',
-            payload: e.target.value,
+            payload: e.currentTarget.value.split('?')[0],
           })
         }
       />

@@ -22,25 +22,27 @@ interface InitialState {
   method: string;
   baseURL: string;
   params: Params[];
+  queryString: string;
 }
 const initialState: InitialState = {
   endpoint: '',
   method: 'GET',
-  baseURL: '',
+  baseURL: 'https://jsonplaceholder.typicode.com',
   params: [
     {
       id: '',
       value: '',
     },
   ],
+  queryString: '',
 };
 const reducer = (state: InitialState, action: AppActions) => {
   switch (action.type) {
     case Types.UPDATE_STATE:
+      console.log(state, action.payload);
       return { ...state, [action.key!]: action.payload };
     case Types.ADD_PARAMS:
       state.params.push({ id: '', value: '' });
-      console.log(state.params);
       return { ...state };
     case Types.UPDATE_PARAMS:
       const shallow = state.params;
@@ -54,14 +56,29 @@ const reducer = (state: InitialState, action: AppActions) => {
       if (state.params.length > 1) {
         const ParamUpdate = state.params;
         ParamUpdate.splice(action.index!, 1);
-        return { ...state, params: ParamUpdate };
+        const queryParams: any = [];
+
+        state.params.forEach((param) =>
+          queryParams.push(`${param.id}=${param.value}`)
+        );
+        const data = queryParams.join('&');
+        return { ...state, params: ParamUpdate, queryString: data };
       }
-      return { ...state, params: [{ id: '', value: '' }] };
+      return {
+        ...state,
+        params: [{ id: '', value: '' }],
+        queryString: [],
+      };
 
     case Types.APPEND_PARAMS:
-      const queryParams = state.params.map((param) => param.id);
-      console.log(queryParams);
-      return { ...state };
+      const queryParams: any = [];
+
+      state.params.forEach((param) =>
+        queryParams.push(`${param.id}=${param.value}`)
+      );
+      const data = queryParams.join('&');
+
+      return { ...state, queryString: data };
     default:
       return state;
   }

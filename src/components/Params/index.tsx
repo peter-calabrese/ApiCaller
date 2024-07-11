@@ -28,26 +28,32 @@ const Params = () => {
           <TextInput
             placeholder={'Param Key'}
             value={option.id}
-            setValue={(e) =>
+            setValue={(e) => {
               dispatch({
                 type: Types.UPDATE_PARAMS,
                 index: index,
                 key: 'id',
                 payload: e.target.value,
-              })
-            }
+              });
+              dispatch({
+                type: Types.APPEND_PARAMS,
+              });
+            }}
           />
           <TextInput
             placeholder={'Param Value'}
             value={option.value}
-            setValue={(e) =>
+            setValue={(e) => {
               dispatch({
                 type: Types.UPDATE_PARAMS,
                 index: index,
                 key: 'value',
                 payload: e.target.value,
-              })
-            }
+              });
+              dispatch({
+                type: Types.APPEND_PARAMS,
+              });
+            }}
           />
           <Button
             style={{ color: '#fff' }}

@@ -1,4 +1,4 @@
-import { Input } from 'antd';
+import { Input, InputProps } from 'antd';
 import React from 'react';
 interface Props {
   placeholder: string;
